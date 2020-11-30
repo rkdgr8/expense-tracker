@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context/auth";
@@ -7,9 +7,10 @@ import {
   cardStyle,
   formStyle,
   inputStyle,
-  buttonStyle,
+  btnStyle,
 } from "./style";
 import Snackbar from "@material-ui/core/Snackbar";
+import Button from "@material-ui/core/Button";
 import Alert from "@material-ui/lab/Alert";
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
@@ -20,6 +21,15 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setAuthToken } = useAuth();
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true);
+
+  useEffect(() => {
+    if (email !== "" && password !== "") {
+      setIsBtnDisabled(false);
+    } else {
+      setIsBtnDisabled(true);
+    }
+  }, [email, password]);
 
   function postLogin() {
     axios
@@ -66,9 +76,15 @@ function Login() {
           placeholder="password"
           css={inputStyle}
         />
-        <button onClick={postLogin} css={buttonStyle}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={postLogin}
+          disabled={isBtnDisabled}
+          style={btnStyle}
+        >
           Sign In
-        </button>
+        </Button>
       </div>
       <Link to="/signup">Don't have an account?</Link>
       <Snackbar

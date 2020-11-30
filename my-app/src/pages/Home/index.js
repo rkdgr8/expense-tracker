@@ -7,12 +7,13 @@ import Filters from "../../components/Filters/index";
 import Button from "@material-ui/core/Button";
 import Modal from "../../components/Modal/index";
 import {
-  containerStyle,
   buttonStyle,
   fieldContStyle,
   btnContainer,
   modalBodyCont,
   modalBtnStyle,
+  logOutStyle,
+  containerStyle,
 } from "./style";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
@@ -32,12 +33,6 @@ function Home(props) {
   const [itemCategory, setItemCategory] = useState("");
   const [itemAmt, setItemAmt] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);
-
-  useEffect(() => {
-    if (itemDescription !== "" && itemAmt !== "" && itemCategory != "") {
-      setBtnDisabled(false);
-    }
-  }, [itemDescription, itemCategory, itemAmt]);
 
   function createExpenseItem() {
     setBtnDisabled(true);
@@ -126,6 +121,12 @@ function Home(props) {
   }
 
   useEffect(() => {
+    if (itemDescription !== "" && itemAmt !== "" && itemCategory != "") {
+      setBtnDisabled(false);
+    }
+  }, [itemDescription, itemCategory, itemAmt]);
+
+  useEffect(() => {
     fetchExpenses(startDate, endDate);
   }, [startDate, endDate]);
 
@@ -135,6 +136,10 @@ function Home(props) {
 
   return (
     <div css={containerStyle}>
+      <div onClick={logOut} css={logOutStyle}>
+        Logout
+      </div>
+
       <div css={buttonStyle} onClick={() => setIsOpen(true)}>
         <Button variant="contained" color="primary">
           Create a new expense item

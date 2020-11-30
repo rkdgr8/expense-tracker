@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import {
@@ -6,9 +6,10 @@ import {
   cardStyle,
   formStyle,
   inputStyle,
-  buttonStyle,
+  btnStyle,
 } from "./style";
 import Snackbar from "@material-ui/core/Snackbar";
+import Button from "@material-ui/core/Button";
 import Alert from "@material-ui/lab/Alert";
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
@@ -18,7 +19,16 @@ function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   let history = useHistory();
+
+  useEffect(() => {
+    if (username !== "" && email !== "" && password !== "") {
+      setIsBtnDisabled(false);
+    } else {
+      setIsBtnDisabled(true);
+    }
+  }, [username, email, password]);
 
   function postSignUp() {
     axios
@@ -60,9 +70,15 @@ function Signup() {
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={postSignUp} css={buttonStyle}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={postSignUp}
+          disabled={isBtnDisabled}
+          style={btnStyle}
+        >
           Sign Up
-        </button>
+        </Button>
       </div>
       <Link to="/login">Already have an account?</Link>
       <Snackbar

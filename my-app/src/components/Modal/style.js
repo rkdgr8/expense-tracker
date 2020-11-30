@@ -25,4 +25,7 @@ export const modalStyle = css`
     width: 650px;
     min-height: 400px;
   }
+  @media (${mediaQueries.mobileWidth}) {
+    height: 100vh;
+  }
 `;
