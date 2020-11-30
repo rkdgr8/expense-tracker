@@ -69,3 +69,23 @@ export const btnContainer = css`
 export const modalBtnStyle = {
   minWidth: `${window.innerWidth < 451 ? "120px" : "250px"}`,
 };
+
+export const logOutStyle = css`
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  color: blue;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const viewExpStyle = css`
+  position: fixed;
+  top: 10px;
+  right: 100px;
+  color: blue;
+  &:hover {
+    cursor: pointer;
+  }
+`;

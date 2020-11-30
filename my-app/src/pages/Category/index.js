@@ -12,6 +12,8 @@ import {
   fieldContStyle,
   btnContainer,
   modalBtnStyle,
+  logOutStyle,
+  viewExpStyle,
 } from "./style";
 import Button from "@material-ui/core/Button";
 import Modal from "../../components/Modal/index";
@@ -78,12 +80,23 @@ export default function Category() {
       });
   }
 
+  function logOut() {
+    setAuthToken();
+    history.push("/login");
+  }
+
   useEffect(() => {
     fetchCategories();
   }, []);
 
   return (
     <div css={containerStyle}>
+      <div onClick={() => history.push("/")} css={viewExpStyle}>
+        View expenses
+      </div>
+      <div onClick={logOut} css={logOutStyle}>
+        Logout
+      </div>
       <div css={buttonStyle}>
         <Button
           variant="contained"

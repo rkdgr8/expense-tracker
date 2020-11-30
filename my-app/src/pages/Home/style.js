@@ -57,3 +57,13 @@ export const logOutStyle = css`
     cursor: pointer;
   }
 `;
+
+export const viewCatStyle = css`
+  position: fixed;
+  top: 10px;
+  right: 100px;
+  color: blue;
+  &:hover {
+    cursor: pointer;
+  }
+`;
