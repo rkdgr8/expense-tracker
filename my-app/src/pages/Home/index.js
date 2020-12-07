@@ -125,6 +125,10 @@ function Home(props) {
     if (itemDescription !== "" && itemAmt !== "" && itemCategory != "") {
       setBtnDisabled(false);
     }
+      else {
+          setBtnDisabled(true);
+      }
+    
   }, [itemDescription, itemCategory, itemAmt]);
 
   useEffect(() => {
