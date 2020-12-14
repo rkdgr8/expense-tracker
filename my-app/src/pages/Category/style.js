@@ -2,17 +2,30 @@ import { css } from "@emotion/core";
 import { mediaQueries } from "../../constants/style";
 
 export const buttonStyle = css`
-  margin: 0 auto 20px auto;
-  max-width: 300px;
+  margin: 10px 0 20px;
+  text-align: center;
 `;
 
 export const containerStyle = css`
-  width: 100vw;
-  height: 100vh;
+  position:fixed;
+  width: 100%;
+  height:100%;
+  overflow-y: scroll;
   background-color: #e8e4ee;
   padding: 50px 20px 20px 20px;
   box-sizing: border-box;
 `;
+
+export const headerStyle = css`
+ position: fixed;
+ width: 100%;
+ margin-left:-20px;
+ height: 40px;
+ z-index: 1;
+ top: 0px;
+ background-color: rgb(255, 255, 255);
+ box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+`
 
 export const categoryContainerStyle = css`
   margin: 0 auto;
@@ -59,21 +72,31 @@ export const btnContainer = css`
   left: 0;
   bottom: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   @media (${mediaQueries.mobileWidth}) {
     bottom: 70px;
   }
 `;
 
+// export const modalBtnStyle = {
+//   minWidth: `${window.innerWidth < 451 ? "120px" : "250px"}`,
+// };
+
 export const modalBtnStyle = {
-  minWidth: `${window.innerWidth < 451 ? "120px" : "250px"}`,
-};
+  ['@media(max-width: 450px)']: { // eslint-disable-line no-useless-computed-key
+    minWidth: '150px'
+  },
+  ['@media(min-width: 450px)']: { // eslint-disable-line no-useless-computed-key
+    minWidth: '250px'
+  },
+  margin: '0px 20px'
+}
 
 export const logOutStyle = css`
   position: fixed;
   top: 10px;
-  right: 10px;
+  right: 20px;
   color: blue;
   &:hover {
     cursor: pointer;

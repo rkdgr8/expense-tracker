@@ -14,6 +14,7 @@ import {
   modalBtnStyle,
   logOutStyle,
   viewExpStyle,
+  headerStyle
 } from "./style";
 import Button from "@material-ui/core/Button";
 import Modal from "../../components/Modal/index";
@@ -91,11 +92,13 @@ export default function Category() {
 
   return (
     <div css={containerStyle}>
+      <div css={headerStyle}>
       <div onClick={() => history.push("/")} css={viewExpStyle}>
         View expenses
       </div>
       <div onClick={logOut} css={logOutStyle}>
         Logout
+      </div>
       </div>
       <div css={buttonStyle}>
         <Button

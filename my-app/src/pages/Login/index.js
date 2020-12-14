@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context/auth";
@@ -16,11 +16,12 @@ import Alert from "@material-ui/lab/Alert";
 import { jsx } from "@emotion/core";
 
 function Login() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const { authToken ,setAuthToken } = useAuth();
+  const isAuthenticated = useMemo( () => authToken!=null && authToken!=='undefined' , [authToken]);
+  const [isLoggedIn, setLoggedIn] = useState(isAuthenticated ? true: false);
   const [isError, setIsError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setAuthToken } = useAuth();
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
 
   useEffect(() => {

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../../context/auth";
 import {
   titleStyle,
   cardStyle,
@@ -15,6 +16,11 @@ import Alert from "@material-ui/lab/Alert";
 import { jsx } from "@emotion/core";
 
 function Signup() {
+
+  const { authToken  } = useAuth();
+  const isAuthenticated = useMemo( () => authToken!=null && authToken!=='undefined' , [authToken]);
+  const [isLoggedIn, setLoggedIn] = useState(isAuthenticated ? true: false);
+
   const [isError, setIsError] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -45,6 +51,10 @@ function Signup() {
       .catch((e) => {
         setIsError(true);
       });
+  }
+
+  if (isLoggedIn) {
+    return <Redirect to="/" />;
   }
 
   return (

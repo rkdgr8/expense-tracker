@@ -15,6 +15,7 @@ import {
   logOutStyle,
   containerStyle,
   viewCatStyle,
+  headerStyle
 } from "./style";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
@@ -141,11 +142,14 @@ function Home(props) {
 
   return (
     <div css={containerStyle}>
+
+      <div css={headerStyle}>
       <div onClick={() => history.push("/category")} css={viewCatStyle}>
         View Category
       </div>
       <div onClick={logOut} css={logOutStyle}>
         Logout
+      </div>
       </div>
 
       <div css={buttonStyle} onClick={() => setIsOpen(true)}>
